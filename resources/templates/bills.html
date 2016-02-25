@@ -1,0 +1,21 @@
+<html>
+<body>
+<form action="/addBill" method="post">
+    <input type="text" placeholder="Enter biller name" name="biller"/>
+    <input type="number" placeholder="Enter amount Due" name="amountDue"/>
+    <input type="text" placeholder="month/day" name="dueDate">
+    <input type="hidden" value="">
+    <button type="submit">Add</button>
+</form>
+<form action="/logout" method="post">
+    <button type="submit">Logout</button>
+</form>
+    {{#bills}}
+    <form action="/delete" method="post">
+        {{dateMonth}}/{{dateDay}} {{biller}} {{amount}} <a href="/edit?id={{id}}">Edit</a>
+        <input type="hidden" value="{{id}}" name="id"/>
+        <button type="submit">Delete</button>
+    </form>
+    {{/bills}}
+</body>
+</html>

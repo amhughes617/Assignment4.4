@@ -1,0 +1,11 @@
+<html>
+<body>
+<form action="/editBill" method="post">
+    <input type="text" placeholder="{{biller}}" name="biller"/>
+    <input type="number" placeholder="{{amount}}" name="amountDue"/>
+    <input type="text" placeholder="{{dateMonth}}/{{dateDay}}" name="dueDate">
+    <input type="hidden" value="{{id}}" name="id">
+    <button type="submit">Edit</button>
+</form>
+</body>
+</html>
