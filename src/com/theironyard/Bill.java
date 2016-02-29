@@ -63,7 +63,7 @@ public class Bill {
     }
 
     public void flipDueSoon() {
-        if (dueDate.isAfter(currentDate) && dueDate.getDayOfYear() - currentDate.getDayOfYear() < 10) {
+        if (dueDate.isAfter(currentDate) && currentDate.getYear() == dueDate.getYear() && dueDate.getDayOfYear() - currentDate.getDayOfYear() < 10) {
             setDueSoon(true);
         } else {
             setDueSoon(false);

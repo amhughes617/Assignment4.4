@@ -10,13 +10,13 @@
 <form action="/logout" method="post">
     <button type="submit">Logout</button>
 </form>
-<form action="/delete" method="post">
     {{#bills}}
+<form action="/delete" method="post">
         {{.}}<a href="/edit?id={{id}}">     Edit</a>
         <input type="hidden" value="{{id}}" name="id"/>
-        <button type="submit">Delete</button>{{#dueSoon}}This bill is due soon!{{/dueSoon}}<br/>
-    {{/bills}}
+        <button type="submit">Delete</button>{{#dueSoon}}This bill is due soon!{{/dueSoon}}
 </form>
+    {{/bills}}
 {{^beginning}}
 <a href="/?offset={{offsetDown}}">Previous</a>
 {{/beginning}}

@@ -107,6 +107,7 @@ public class Main {
                     user.bills.remove(index);
                     for (Bill bill : user.bills) {
                         bill.setId(user.bills.indexOf(bill));
+                        bill.flipDueSoon();
                     }
                     response.redirect("/");
                     return "";
