@@ -13,7 +13,6 @@ import java.util.HashMap;
 public class Main {
 
     static HashMap<String, User> users = new HashMap<>();
-    //static LocalDate currentDate = LocalDate.now();
 
     public static void main(String[] args) {
 	// write your code here
@@ -34,6 +33,7 @@ public class Main {
                             offset = Integer.valueOf(offsetStr);
                         }
                         ArrayList<Bill> shortBills = new ArrayList<>(user.bills.subList(offset, Math.min(offset + 5, user.bills.size())));
+
                         m.put("bills", shortBills);
                         m.put("end", offset >= user.bills.size() - 5);
                         m.put("beginning", offset == 0);
@@ -93,6 +93,7 @@ public class Main {
                     LocalDate date = LocalDate.parse(request.queryParams("dueDate"));
                     BigDecimal amount = BigDecimal.valueOf(Double.valueOf(request.queryParams("amountDue")));
                     Bill bill = new Bill(biller, date, amount, user.bills.size());
+                    bill.flipDueSoon();
                     user.bills.add(bill);
                     response.redirect("/");
                     return "";
@@ -112,16 +113,17 @@ public class Main {
                 })
         );
         Spark.post(
-                "/editBill",
+                "/edit",
                 ((request, response) -> {
                     User user = getUserFromSession(request.session());
                     int index = Integer.valueOf(request.queryParams("id"));
                     String biller = request.queryParams("biller");
                     String amountStr = request.queryParams("amountDue");
-//                    if (!dueDate.isEmpty()) {
-//                        user.bills.get(index).setDateDay(Integer.valueOf(dueDate.split("/")[1]));
-//                        user.bills.get(index).setDateMonth(Integer.valueOf(dueDate.split("/")[0]));
-//                    }
+                    String dueDate = request.queryParams("dueDate");
+                    if (!dueDate.isEmpty()) {
+                        user.bills.get(index).dueDate = LocalDate.parse(dueDate);
+                        user.bills.get(index).flipDueSoon();
+                    }
                     if (!biller.isEmpty()) {
                         user.bills.get(index).setBiller(biller);
                     }

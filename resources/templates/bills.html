@@ -14,7 +14,7 @@
     {{#bills}}
         {{.}}<a href="/edit?id={{id}}">     Edit</a>
         <input type="hidden" value="{{id}}" name="id"/>
-        <button type="submit">Delete</button><br/>
+        <button type="submit">Delete</button>{{#dueSoon}}This bill is due soon!{{/dueSoon}}<br/>
     {{/bills}}
 </form>
 {{^beginning}}

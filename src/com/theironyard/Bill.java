@@ -8,11 +8,12 @@ import java.time.LocalDate;
  * Created by alexanderhughes on 2/25/16.
  */
 public class Bill {
+    LocalDate currentDate = LocalDate.now();
     String biller;
     BigDecimal amount;
     int id;
     LocalDate dueDate;
-    //boolean isDone;
+    boolean dueSoon;
 
     public Bill(String biller, LocalDate dueDate, BigDecimal amount, int id) {
         this.biller = biller;
@@ -44,6 +45,31 @@ public class Bill {
     public void setId(int id) {
         this.id = id;
     }
+
+    public boolean isDueSoon() {
+        return dueSoon;
+    }
+
+    public void setDueSoon(boolean dueSoon) {
+        this.dueSoon = dueSoon;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public void flipDueSoon() {
+        if (dueDate.isAfter(currentDate) && dueDate.getDayOfYear() - currentDate.getDayOfYear() < 10) {
+            setDueSoon(true);
+        } else {
+            setDueSoon(false);
+        }
+    }
+
 
     @Override
     public String toString() {

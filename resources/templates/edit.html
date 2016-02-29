@@ -1,9 +1,9 @@
 <html>
 <body>
-<form action="/editBill" method="post">
+<form action="/edit" method="post">
     <input type="text" placeholder="{{biller}}" name="biller"/>
     <input type="number" step="0.01" placeholder="{{amount}}" name="amountDue"/>
-
+    <input type="date" name="dueDate">
     <input type="hidden" value="{{id}}" name="id">
     <button type="submit">Edit</button>
 </form>
