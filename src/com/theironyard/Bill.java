@@ -1,20 +1,22 @@
 package com.theironyard;
 
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 /**
  * Created by alexanderhughes on 2/25/16.
  */
 public class Bill {
     String biller;
-    int dateDay, dateMonth;
-    int amount;
+    BigDecimal amount;
     int id;
+    LocalDate dueDate;
     //boolean isDone;
 
-    public Bill(String biller, int dateDay, int dateMonth, int amount, int id) {
+    public Bill(String biller, LocalDate dueDate, BigDecimal amount, int id) {
         this.biller = biller;
-        this.dateDay = dateDay;
-        this.dateMonth = dateMonth;
+        this.dueDate = dueDate;
         this.amount = amount;
         this.id = id;
     }
@@ -27,27 +29,11 @@ public class Bill {
         this.biller = biller;
     }
 
-    public int getDateDay() {
-        return dateDay;
-    }
-
-    public void setDateDay(int dateDay) {
-        this.dateDay = dateDay;
-    }
-
-    public int getDateMonth() {
-        return dateMonth;
-    }
-
-    public void setDateMonth(int dateMonth) {
-        this.dateMonth = dateMonth;
-    }
-
-    public int getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
@@ -57,5 +43,10 @@ public class Bill {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s/%s%s$%.2f", dueDate.getMonthValue(), dueDate.getDayOfMonth(), biller, amount);
     }
 }
