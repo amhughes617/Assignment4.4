@@ -15,7 +15,7 @@ public class Bill {
     LocalDate dueDate;
     boolean dueSoon;
 
-    public Bill(String biller, LocalDate dueDate, BigDecimal amount, int id) {
+    public Bill(int id, String biller, LocalDate dueDate, BigDecimal amount) {
         this.biller = biller;
         this.dueDate = dueDate;
         this.amount = amount;
@@ -62,7 +62,7 @@ public class Bill {
         this.dueDate = dueDate;
     }
 
-    public void flipDueSoon() {
+    public void flipDueSoon() {//checks the duedate of a bill in respect to the current date
         if (dueDate.isAfter(currentDate) && currentDate.getYear() == dueDate.getYear() && dueDate.getDayOfYear() - currentDate.getDayOfYear() < 10) {
             setDueSoon(true);
         } else {
@@ -72,7 +72,7 @@ public class Bill {
 
 
     @Override
-    public String toString() {
+    public String toString() {//formats the way the object is represented in memory
         return String.format("%s/%s%s$%.2f", dueDate.getMonthValue(), dueDate.getDayOfMonth(), biller, amount);
     }
 }
